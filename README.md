@@ -133,7 +133,19 @@ If firewall is disable then enable it using
 ```bash
  sudo ufw allow 4000
 ```
+Install Nginx
 
+```bash
+ sudo apt install -y nginx
+```
+
+adding Nginx in firewall
+
+```bash
+ sudo ufw status
+```
+```bash
+ sud
 ---
 
 # 5. Configure Nginx Reverse Proxy
