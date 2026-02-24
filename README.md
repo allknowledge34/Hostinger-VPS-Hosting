@@ -63,7 +63,7 @@ Install Git
 
 You can either:
 
-- If you want to setup MongoDB on VPS Follow this Guide: [click here](https://github.com/allknowledge34/Hostinger-VPS-Hosting/MongoDB_Setup_on_VPS.md) 
+- If you want to setup MongoDB on VPS Follow this Guide: [click here](https://github.com/allknowledge34/Hostinger-VPS-Hosting/blob/main/MongoDB_Setup_on_VPS.md) 
 OR  
 - Use **MongoDB Atlas (Recommended)**
 
