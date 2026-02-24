@@ -63,7 +63,7 @@ Install Git
 
 You can either:
 
-- Install MongoDB locally on VPS  
+- If you want to setup MongoDB on VPS Follow this Guide: [click here](https://github.com/GreatStackDev/notes/blob/main/MongoDB_Setup_on_VPS.md) 
 OR  
 - Use **MongoDB Atlas (Recommended)**
 
@@ -109,7 +109,7 @@ Installing pm2 to Start Backend
  npm install -g pm2
 ```
 ```bash
- pm2 start index.js --name project-backend
+ pm2 start src/index.js --name project-backend
 ```
 Start Backend on startup
 ```bash
@@ -131,7 +131,7 @@ If firewall is disable then enable it using
  sudo ufw allow 'OpenSSH'
 ```
 ```bash
- sudo ufw allow 4000
+ sudo ufw allow 3000
 ```
 Install Nginx
 
@@ -145,7 +145,8 @@ adding Nginx in firewall
  sudo ufw status
 ```
 ```bash
- sud
+ sudo ufw allow 'Nginx Full'
+```
 ---
 
 # 5. Configure Nginx Reverse Proxy
@@ -158,18 +159,23 @@ nano /etc/nginx/sites-available/api.yourdomain.com.conf
 ```bash
 server {
     listen 80;
-    server_name api.yourdomain.com;
+    server_name api.yourdomain.com.;
 
     location / {
-        proxy_pass http://localhost:4000;
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
         proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 }
 ```
-
+Save and exit (Ctrl + X, then Y and Enter).
+---
 Create symbolic links to enable the sites.
 
 ```bash
@@ -201,7 +207,7 @@ ufw allow 'Nginx Full'
 Remove backend port exposure:
 
 ```bash
-ufw delete allow 4000
+ufw delete allow 3000
 ```
 
 ---
